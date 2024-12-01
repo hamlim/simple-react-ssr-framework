@@ -1,0 +1,22 @@
+{
+  "name": "node-starter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node ./scripts/build-routes.mjs && node ./scripts/build-entries.mjs && tailwindcss -i ./src/style.css -o ./public/style.css && node ./server.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "imports": {
+    "#framework/*": "./framework/*.mjs"
+  },
+  "dependencies": {
+    "@hono/node-server": "1.13.7",
+    "@tailwindcss/cli": "4.0.0-beta.4",
+    "fast-glob": "^3.3.2",
+    "hono": "4.6.12",
+    "oxc-transform": "0.38.0",
+    "react": "0.0.0-experimental-7670501b-20241124",
+    "react-dom": "0.0.0-experimental-7670501b-20241124",
+    "tailwindcss": "4.0.0-beta.4"
+  }
+}
