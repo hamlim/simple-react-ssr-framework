@@ -1,12 +1,12 @@
 import { existsSync } from "node:fs";
-import { mkdir, readFile, rmdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join as pathJoin } from "node:path";
 import process from "node:process";
 import oxc from "oxc-transform";
-import { routes } from "../routes.gen.mjs";
+import { routes } from "../public/routes.gen.mjs";
 
 try {
-  await rmdir(pathJoin(process.cwd(), "./dist/app"), { recursive: true });
+  await rm(pathJoin(process.cwd(), "./dist/app"), { recursive: true });
 } catch {}
 
 for (let [_, route] of routes) {

@@ -1,7 +1,9 @@
+import React from "react";
 import { getStore } from "#framework/storage";
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-export default async function IndexPage() {
+export default function IndexPage() {
 	let store = getStore();
+	console.log(Object.keys(store));
 	return _jsxs("html", {
 		lang: "en",
 		className: "h-full",

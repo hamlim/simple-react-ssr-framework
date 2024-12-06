@@ -3,11 +3,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ./scripts/build-routes.mjs && node ./scripts/build-entries.mjs && tailwindcss -i ./src/style.css -o ./public/style.css && node ./server.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:tailwind": "tailwindcss -i ./src/style.css -o ./public/style.css --watch",
+    "dev:routes": "node ./scripts/build-routes.mjs --watch-dir=./src",
+    "dev:entries": "node ./scripts/build-entries.mjs --watch-dir=./src",
+    "dev": "bun run dev:routes & bun run dev:entries & bun run dev:tailwind & node ./server.mjs",
+    "build:routes": "node ./scripts/build-routes.mjs",
+    "build:entries": "node ./scripts/build-entries.mjs",
+    "build:tailwind": "tailwindcss -i ./src/style.css -o ./public/style.css",
+    "build": "bun run build:routes && bun run build:entries && bun run build:tailwind"
   },
   "imports": {
-    "#framework/*": "./framework/*.mjs"
+    "#framework/*": "./framework/*.mjs",
+    "#dist/*": "./dist/*",
+    "#client/*": "./public/*.mjs"
   },
   "dependencies": {
     "@hono/node-server": "1.13.7",
@@ -17,6 +25,8 @@
     "oxc-transform": "0.38.0",
     "react": "0.0.0-experimental-7670501b-20241124",
     "react-dom": "0.0.0-experimental-7670501b-20241124",
-    "tailwindcss": "4.0.0-beta.4"
+    "tailwindcss": "4.0.0-beta.4",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
   }
 }

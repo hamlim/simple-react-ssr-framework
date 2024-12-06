@@ -11,7 +11,7 @@ export let routes/*: Array<[string, Route]>*/ = [
       type: "page",
       params: [],
       $type: "custom",
-      mod: () => import("./dist/app/index.page.js")
+      mod: () => import("#dist/app/index.page.js")
     }
   ],
 ];

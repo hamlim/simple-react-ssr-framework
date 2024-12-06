@@ -106,7 +106,8 @@ export async function generate(
   rootDir: string;
 }*/,
 ) /*: Promise<void> */ {
-  let destinationDir = pathJoin("./", "routes.gen.mjs");
+  // let destinationDir = pathJoin("./", "routes.gen.mjs");
+  let clientDestinationDir = pathJoin("./public", "routes.gen.mjs");
 
   let routeFiles = await fastGlob(
     pathJoin(options.rootDir, "**/*.{route,page}.{ts,tsx,js,jsx}"),
@@ -128,7 +129,7 @@ export async function generate(
       ${Object.entries(route)
         .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
         .join(",\n      ")},
-      mod: () => import("./dist/app${route.filePath.replace(
+      mod: () => import("#dist/app${route.filePath.replace(
         extname(route.filePath),
         ".js",
       )}")
@@ -138,7 +139,8 @@ export async function generate(
   }
   contents.push(`];`);
 
-  await writeFile(destinationDir, contents.join("\n"));
+  // await writeFile(destinationDir, contents.join("\n"));
+  await writeFile(clientDestinationDir, contents.join("\n"));
 
   console.log("Wrote routes.gen.ts");
 }

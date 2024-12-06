@@ -1,5 +1,6 @@
 import { createElement } from "react";
 import rds from "react-dom/server.browser";
+import { importMap } from "#client/import-map";
 import { getStore } from "./storage.mjs";
 
 let { renderToReadableStream } = rds;
@@ -16,9 +17,15 @@ export async function handler(context) {
   if (route.type === "page") {
     // SSR
     let Component = resolvedModule.default;
-    let stream = await renderToReadableStream(createElement(Component), {
-      bootstrapScripts: ["/static/main.js"],
-    });
+    let stream = await renderToReadableStream(
+      createElement(Component, {
+        request,
+      }),
+      {
+        bootstrapModules: ["/static/main.mjs"],
+        importMap,
+      },
+    );
     context.status(200);
     context.header("content-type", "text/html");
     return context.body(stream);
